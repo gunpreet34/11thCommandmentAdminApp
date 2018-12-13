@@ -1,6 +1,8 @@
 package com.hg.admin11thcommandment.activities;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hg.admin11thcommandment.utils.DatabaseHandler;
@@ -24,15 +27,28 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mEmailInp;
     private EditText mPasswordInp;
     private Button mLogInBtn;
+    private TextView mSignUp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().setTitle("Login");
+        getSupportActionBar().hide();
 
-        mEmailInp=findViewById(R.id.email_input);
-        mPasswordInp=findViewById(R.id.password_input);
-        mLogInBtn=findViewById(R.id.log_in_btn);
+        mEmailInp = findViewById(R.id.et_email_address);
+        mPasswordInp = findViewById(R.id.et_password);
+        mSignUp = findViewById(R.id.sign_up);
+        mSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = "https://commandment-api.herokuapp.com/registerAdmin";
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(LoginActivity.this, Uri.parse(url));
+            }
+        });
+
+        mLogInBtn=findViewById(R.id.btn_login);
         mLogInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

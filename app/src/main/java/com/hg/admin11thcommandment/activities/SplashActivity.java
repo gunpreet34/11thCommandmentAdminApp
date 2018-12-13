@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        getSupportActionBar().setTitle("Admin app");
+        getSupportActionBar().hide();
 
         mImageView = findViewById(R.id.iv_logged_in);
         mImageView.setVisibility(View.INVISIBLE);
