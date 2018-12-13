@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.ChooseActivity">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/but_news"
+            android:src="@drawable/news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="News/Poll"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:src="@drawable/add"
+            android:id="@+id/but_advertisement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Advertisement"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
