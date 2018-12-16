@@ -14,7 +14,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.SearchView;
 
-import com.hg.admin11thcommandment.utils.DatabaseHandler;
+import com.hg.admin11thcommandment.database.DatabaseHandler;
 import com.hg.admin11thcommandment.adapters.NewsAdapter;
 import com.hg.admin11thcommandment.R;
 import com.hg.admin11thcommandment.utils.VolleyCallback;

@@ -21,24 +21,12 @@ public class ChooseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         util = new SharedPrefUtil(ChooseActivity.this);
-        if(util.getAccess() == 1){
-            setContentView(R.layout.activity_choose_admin);
-            mCategory = findViewById(R.id.but_category);
-            mCategory.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(ChooseActivity.this,AddCategoryActivity.class));
-                }
-            });
-        }else{
-            setContentView(R.layout.activity_choose_editor);
-        }
-
+        setContentView(R.layout.activity_choose);
         getSupportActionBar().setTitle("Admin app");
-
 
         mNews = findViewById(R.id.but_news);
         mAdvertisement = findViewById(R.id.but_advertisement);
+        mCategory = findViewById(R.id.but_category);
 
         mNews.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +38,12 @@ public class ChooseActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ChooseActivity.this,AdvertisementActivity.class));
+            }
+        });
+        mCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ChooseActivity.this,CategoryActivity.class));
             }
         });
 

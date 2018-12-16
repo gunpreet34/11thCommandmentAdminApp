@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.hg.admin11thcommandment.R;
 import com.hg.admin11thcommandment.fragments.AdvertisementChooseFragment;
+import com.hg.admin11thcommandment.fragments.CategoryChooseFragment;
 import com.hg.admin11thcommandment.fragments.NewsChooseFragment;
 import com.hg.admin11thcommandment.utils.SharedPrefUtil;
 
@@ -40,7 +41,9 @@ public class NavigationActivity extends AppCompatActivity {
                     advertisementChooseFragment.show(fragmentManager,"Advertisement Choose Fragment");
                     return true;
                 case R.id.navigation_category:
-                    startActivity(new Intent(NavigationActivity.this,AddCategoryActivity.class));
+                    //startActivity(new Intent(NavigationActivity.this,AddCategoryActivity.class));
+                    DialogFragment categoryChooseFragment= new CategoryChooseFragment();
+                    categoryChooseFragment.show(fragmentManager,"Category Choose Fragment");
                     return true;
             }
             return false;
@@ -51,11 +54,7 @@ public class NavigationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         util = new SharedPrefUtil(getApplicationContext());
-        if(util.getAccess() == 1){
-            setContentView(R.layout.activity_navigation_admin);
-        }else {
-            setContentView(R.layout.activity_navigation_editor);
-        }
+        setContentView(R.layout.activity_navigation);
         getSupportActionBar().setTitle("Admin Panel");
         mTextMessage = findViewById(R.id.message);
         mTextMessageTwo = findViewById(R.id.message_two);

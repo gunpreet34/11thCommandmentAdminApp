@@ -17,7 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.hg.admin11thcommandment.utils.DatabaseHandler;
+import com.hg.admin11thcommandment.database.DatabaseHandler;
 import com.hg.admin11thcommandment.R;
 
 import java.io.ByteArrayOutputStream;

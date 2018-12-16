@@ -1,4 +1,4 @@
-package com.hg.admin11thcommandment.utils;
+package com.hg.admin11thcommandment.database;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,6 +13,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.hg.admin11thcommandment.utils.SharedPrefUtil;
+import com.hg.admin11thcommandment.utils.VolleyCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -296,6 +298,41 @@ public class DatabaseHandler {
         requestQueue.add(getRequest);
     }
 
+    //Get News By Title
+    public void getNewsByTitle(final VolleyCallback callback,String title) {
+        //Request a POST method to save news with ResponseListener and ResponseErrorListener
+        final Map<String,String> data = new HashMap<>();
+        data.put("title",title);
+        //Log.d("TITLE",data.get("title"));
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"getNewsByTitle", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
+                callback.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                statusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                return data;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+    }
+
+
 
     //CATEGORIES
 
@@ -329,6 +366,79 @@ public class DatabaseHandler {
         requestQueue.add(stringRequest);
     }
 
+    //Update Category
+    public void updateCategory(final Map<String,String> data){
+        //Request a POST method to save news with ResponseListener and ResponseErrorListener
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"updateCategory", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                statusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                data.put("user_id",mUtil.getToken());
+                Log.d("DATA SENT FOR UPDATE",data.toString());
+                return data;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+    }
+
+    //Delete category
+    public void deleteCategory(final Map<String,String> data){
+        //Request a POST method to save news with ResponseListener and ResponseErrorListener
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"deleteCategory", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject;
+                try {
+                    jsonObject = new JSONObject(response);
+                    String data = jsonObject.getString("data");
+                    Toast.makeText(mContext, data, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    Toast.makeText(mContext, "Error in delete news response", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                statusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                return data;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+    }
+
+    //GET CATEGORIES
+
     //Get all categories
     public void getCategories(final VolleyCallback callback) {
         //Request a GET method to save news with ResponseListener and ResponseErrorListener
@@ -353,6 +463,60 @@ public class DatabaseHandler {
         requestQueue.add(getRequest);
     }
 
+    //Get unverified categories
+    public void getUnverifiedCategories(final VolleyCallback callback) {
+        //Request a GET method to save news with ResponseListener and ResponseErrorListener
+        String getNewsUrl = url+"getUnverifiedCategories";
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, getNewsUrl, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // display response
+                        Log.d("Response", response.toString());
+                        callback.onSuccess(response.toString());
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", error.toString());
+                    }
+                }
+        );
+        requestQueue.add(getRequest);
+    }
+
+    //Get verified categories
+    public void getVerifiedCategories(final VolleyCallback callback) {
+        //Request a GET method to save news with ResponseListener and ResponseErrorListener
+        String getNewsUrl = url+"getVerifiedCategories";
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, getNewsUrl, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // display response
+                        Log.d("Response", response.toString());
+                        callback.onSuccess(response.toString());
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("Error.Response", error.toString());
+                    }
+                }
+        );
+        requestQueue.add(getRequest);
+    }
+
+
+    //GET ADVERTISEMENTS
+
+    //Get all advertisements
     public void getAllAdvertisements(final VolleyCallback callback) {
         //Request a GET method to save news with ResponseListener and ResponseErrorListener
         String getNewsUrl = url+"getAllAdvertisements/"+mUtil.getToken();
@@ -377,6 +541,7 @@ public class DatabaseHandler {
         requestQueue.add(getRequest);
     }
 
+    //Get unverified advertisements
     public void getUnverifiedAdvertisements(final VolleyCallback callback) {
         //Request a GET method to save news with ResponseListener and ResponseErrorListener
         String getNewsUrl = url+"getUnverifiedAdvertisements";
@@ -400,11 +565,6 @@ public class DatabaseHandler {
         );
         requestQueue.add(getRequest);
     }
-
-
-
-
-
 
     //Search advertisement by title
     public void searchAdvertisementByTitle(final VolleyCallback callback,String title) {
@@ -476,41 +636,8 @@ public class DatabaseHandler {
         requestQueue.add(stringRequest);
     }
 
-    //GetNewsByTitle
-    public void getNewsByTitle(final VolleyCallback callback,String title) {
-        //Request a POST method to save news with ResponseListener and ResponseErrorListener
-        final Map<String,String> data = new HashMap<>();
-        data.put("title",title);
-        //Log.d("TITLE",data.get("title"));
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"getNewsByTitle", new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                //Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
-                callback.onSuccess(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }
-        ){
-            @Override
-            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                statusCode = response.statusCode;
-                return super.parseNetworkResponse(response);
-            }
 
-            @Override
-            protected Map<String, String> getParams() {
-                return data;
-            }
-        };
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        requestQueue.add(stringRequest);
-    }
-
-    //GetNewsByTitle
+    //Get Advertisement By Title
     public void getAdvertisementByTitle(final VolleyCallback callback,String title) {
         //Request a POST method to save news with ResponseListener and ResponseErrorListener
         final Map<String,String> data = new HashMap<>();
