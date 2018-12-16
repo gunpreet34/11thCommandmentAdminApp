@@ -64,9 +64,13 @@ public class ChooseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        util = new SharedPrefUtil(ChooseActivity.this);
         switch (item.getItemId()) {
+            case R.id.menu_ui:
+                util.saveUi(1 - util.getUi());
+                startActivity(new Intent(ChooseActivity.this,SplashActivity.class));
+                break;
             case R.id.menu_logout:
-                util = new SharedPrefUtil(ChooseActivity.this);
                 util.saveToken("");
                 util.saveAccess(0);
                 util.logout();

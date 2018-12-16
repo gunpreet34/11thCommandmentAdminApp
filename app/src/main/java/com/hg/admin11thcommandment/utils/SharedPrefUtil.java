@@ -2,8 +2,9 @@ package com.hg.admin11thcommandment.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 
- public class SharedPrefUtil implements SharedConstUtil{
+public class SharedPrefUtil implements SharedConstUtil{
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
@@ -11,6 +12,7 @@ import android.content.SharedPreferences;
         mSharedPreferences=context.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
         mEditor=mSharedPreferences.edit();
     }
+
     public void saveToken(String token){
         mEditor.putString(TOKEN,token);
         mEditor.apply();
@@ -19,16 +21,23 @@ import android.content.SharedPreferences;
         mEditor.putInt(ACCESS,access);
         mEditor.apply();
     }
+    public void saveUi(int ui) {
+        mEditor.putInt(UI,ui);
+        mEditor.apply();
+    }
+
     public String getToken(){
         return mSharedPreferences.getString(TOKEN,null);
     }
-
     public int getAccess(){
         return mSharedPreferences.getInt(ACCESS,0);
+    }
+    public int getUi() {
+        return mSharedPreferences.getInt(UI,0);
     }
 
     public void logout(){
         mEditor.clear().apply();
-
     }
-}
+
+ }

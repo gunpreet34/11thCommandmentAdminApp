@@ -28,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordInp;
     private Button mLogInBtn;
     private TextView mSignUp;
+    private Class targetActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +71,12 @@ public class LoginActivity extends AppCompatActivity {
                                     SharedPrefUtil util = new SharedPrefUtil(LoginActivity.this);
                                     util.saveToken(token);
                                     util.saveAccess(access);
-                                    Intent intent = new Intent(LoginActivity.this,ChooseActivity.class);
+                                    if(util.getUi() == 0){
+                                        targetActivity = NavigationActivity.class;
+                                    }else {
+                                        targetActivity = ChooseActivity.class;
+                                    }
+                                    Intent intent = new Intent(LoginActivity.this,targetActivity);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
 

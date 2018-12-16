@@ -42,7 +42,10 @@
         </activity>
         <activity android:name=".activities.ChooseActivity" />
         <activity android:name=".activities.NewsActivity" />
-        <activity android:name=".activities.AdvertisementActivity"></activity>
+        <activity android:name=".activities.AdvertisementActivity" />
+        <activity
+            android:name=".activities.NavigationActivity"
+            android:label="@string/title_activity_navigation"></activity>
     </application>
 
 </manifest>

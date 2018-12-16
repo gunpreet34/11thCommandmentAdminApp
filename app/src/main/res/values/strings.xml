@@ -15,6 +15,10 @@
     <string name="divider_or">OR</string>
     <string name="no_account">Don\’t have an account?</string>
     <string name="signup_label">" Signup"</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_home">News/Post</string>
+    <string name="title_dashboard">Advertisement</string>
+    <string name="title_notifications">Category</string>
 
 
 </resources>

@@ -4,4 +4,5 @@ public interface SharedConstUtil {
     String PREF_NAME="userdata";
     String TOKEN="username";
     String ACCESS="access";
+    String UI="ui";
 }

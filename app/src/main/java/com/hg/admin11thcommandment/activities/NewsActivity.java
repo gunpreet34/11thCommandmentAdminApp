@@ -19,11 +19,11 @@ public class NewsActivity extends AppCompatActivity {
         util = new SharedPrefUtil(NewsActivity.this);
         if(util.getAccess() == 1){
             setContentView(R.layout.activity_news_admin);
-            mVerify = findViewById(R.id.but_verify);
-            mVerify.setOnClickListener(new View.OnClickListener() {
+            mShow = findViewById(R.id.but_show);
+            mShow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(NewsActivity.this,ShowUnverifiedNewsActivity.class);
+                    Intent i = new Intent(NewsActivity.this,ShowAllNewsActivity.class);
                     i.putExtra("type","News/Poll");
                     startActivity(i);
                 }
@@ -38,8 +38,6 @@ public class NewsActivity extends AppCompatActivity {
 
 
         mNew = findViewById(R.id.but_add);
-        mShow = findViewById(R.id.but_show);
-
         mNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,14 +47,17 @@ public class NewsActivity extends AppCompatActivity {
             }
         });
 
-        mShow.setOnClickListener(new View.OnClickListener() {
+        mVerify = findViewById(R.id.but_verify);
+        mVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(NewsActivity.this,ShowAllNewsActivity.class);
+                Intent i = new Intent(NewsActivity.this,ShowUnverifiedNewsActivity.class);
                 i.putExtra("type","News/Poll");
                 startActivity(i);
             }
         });
+
+
     }
 
     @Override

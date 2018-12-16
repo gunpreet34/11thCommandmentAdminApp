@@ -32,7 +32,11 @@ public class SplashActivity extends AppCompatActivity {
         if (mSharedPrefUtil.getToken()==null) {
             targetActivity = LoginActivity.class;
         }else {
-            targetActivity = ChooseActivity.class;
+            if(mSharedPrefUtil.getUi() == 0){
+                targetActivity = NavigationActivity.class;
+            }else {
+                targetActivity = ChooseActivity.class;
+            }
             mImageView.setVisibility(View.VISIBLE);
             mTextView.setVisibility(View.VISIBLE);
         }
