@@ -359,6 +359,7 @@ public class DatabaseHandler {
 
             @Override
             protected Map<String, String> getParams() {
+                data.put("user_id",mUtil.getToken());
                 return data;
             }
         };
@@ -430,6 +431,7 @@ public class DatabaseHandler {
 
             @Override
             protected Map<String, String> getParams() {
+                data.put("user_id",mUtil.getToken());
                 return data;
             }
         };
