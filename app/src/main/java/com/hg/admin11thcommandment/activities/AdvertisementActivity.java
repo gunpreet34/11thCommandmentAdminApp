@@ -37,11 +37,39 @@ public class AdvertisementActivity extends AppCompatActivity {
         }
 
         mSimple = findViewById(R.id.but_simple_add);
+        mSimple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdvertisementActivity.this,PostAdvertisementActivity.class);
+                i.putExtra("type","Simple");
+                i.putExtra("add",true);
+                startActivity(i);
+            }
+        });
+
         mImage = findViewById(R.id.but_image_add);
+        mImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdvertisementActivity.this,PostAdvertisementActivity.class);
+                i.putExtra("type","Image");
+                i.putExtra("add",true);
+                startActivity(i);
+            }
+        });
+
         mVideo = findViewById(R.id.but_video_add);
+        mVideo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(AdvertisementActivity.this,PostAdvertisementActivity.class);
+                i.putExtra("type","Video");
+                i.putExtra("add",true);
+                startActivity(i);
+            }
+        });
+
         mShow = findViewById(R.id.but_show_add);
-
-
         mShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

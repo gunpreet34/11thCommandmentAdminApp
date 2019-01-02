@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.hg.admin11thcommandment.R;
 import com.hg.admin11thcommandment.activities.AddCategoryActivity;
 import com.hg.admin11thcommandment.activities.PostNewsActivity;
+import com.hg.admin11thcommandment.activities.ShowAllAdvertisementsActivity;
 import com.hg.admin11thcommandment.activities.ShowAllNewsActivity;
 import com.hg.admin11thcommandment.activities.ShowUnverifiedNewsActivity;
 import com.hg.admin11thcommandment.utils.SharedPrefUtil;
@@ -37,8 +38,7 @@ public class CategoryChooseFragment extends DialogFragment {
             mShowAllCategories.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(getContext(),ShowAllNewsActivity.class);
-                    i.putExtra("type","News/Poll");
+                    Intent i = new Intent(getContext(),ShowAllAdvertisementsActivity.class);
                     startActivity(i);
                 }
             });
@@ -58,8 +58,8 @@ public class CategoryChooseFragment extends DialogFragment {
         mVerifyCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(),ShowUnverifiedNewsActivity.class);
-                i.putExtra("type","News/Poll");
+                Intent i = new Intent(getContext(),ShowAllAdvertisementsActivity.class);
+                //i.putExtra("type","News/Poll");
                 startActivity(i);
             }
         });

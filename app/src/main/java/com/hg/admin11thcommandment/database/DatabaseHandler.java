@@ -27,7 +27,7 @@ public class DatabaseHandler {
     RequestQueue requestQueue;
     public Context mContext;
     String url = "https://commandment-api.herokuapp.com/";
-    //String url = "http://192.168.1.102:3000/";
+    //String url = "http://192.168.43.33:3000/";
     private SharedPrefUtil mUtil;
     private int statusCode;
 
@@ -148,7 +148,7 @@ public class DatabaseHandler {
             @Override
             public void onResponse(String response) {
                 //Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
-                callback.onSuccess(response.toString());
+                callback.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -183,7 +183,7 @@ public class DatabaseHandler {
             @Override
             public void onResponse(String response) {
                 //Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
-                callback.onSuccess(response.toString());
+                callback.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -513,6 +513,110 @@ public class DatabaseHandler {
         requestQueue.add(getRequest);
     }
 
+    //ADVERTISEMENTS
+
+    //Post new advertisement
+    public void postAdvertisement(final Map<String, String> data){
+        //Request a POST method to save news with ResponseListener and ResponseErrorListener
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"addAdvertisement", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                statusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                data.put("user_id",mUtil.getToken());
+                return data;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+    }
+
+    //Update Advertisement
+    public void updateAdvertisement(final Map<String,String> data){
+        //Request a POST method to save news with ResponseListener and ResponseErrorListener
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"updateAdvertisement", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                statusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                data.put("user_id",mUtil.getToken());
+                Log.d("DATA SENT FOR UPDATE",data.toString());
+                return data;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+    }
+
+    //Delete advertisement
+    public void deleteAdvertisement(final Map<String,String> data){
+        //Request a POST method to save news with ResponseListener and ResponseErrorListener
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"deleteAdvertisement", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject;
+                try {
+                    jsonObject = new JSONObject(response);
+                    String data = jsonObject.getString("data");
+                    Toast.makeText(mContext, data, Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    Toast.makeText(mContext, "Error in delete advertisement response", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                statusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                return data;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+    }
 
     //GET ADVERTISEMENTS
 

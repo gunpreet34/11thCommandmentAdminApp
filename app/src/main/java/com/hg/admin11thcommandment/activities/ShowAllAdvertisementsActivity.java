@@ -25,9 +25,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ShowAllNewsActivity extends AppCompatActivity {
+public class ShowAllAdvertisementsActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
-    NewsAdapter adapter;
+    AdvertisementAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +35,10 @@ public class ShowAllNewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_show_news);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String type = getIntent().getStringExtra("type");
-        getSupportActionBar().setTitle("News/Poll List");
-        adapter = new NewsAdapter(this);
-        setupRecyclerView();
-
+        getSupportActionBar().setTitle("Advertisements List");
+        adapter = new AdvertisementAdapter(this);
+        setupRecyclerViewForAdvertisement();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -54,7 +51,7 @@ public class ShowAllNewsActivity extends AppCompatActivity {
             public boolean onQueryTextSubmit(String title) {
                 searchView.clearFocus();
                 String type = getIntent().getStringExtra("type");
-                setupRecyclerView(title);
+                setupRecyclerViewForAdvertisement(title);
                 return false;
 
             }
@@ -62,7 +59,7 @@ public class ShowAllNewsActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextChange(String title) {
                 String type = getIntent().getStringExtra("type");
-                setupRecyclerView(title);
+                setupRecyclerViewForAdvertisement(title);
                 //Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
                 return false;
             }
@@ -76,7 +73,7 @@ public class ShowAllNewsActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_refresh:
-                setupRecyclerView();
+                setupRecyclerViewForAdvertisement();
                 break;
             case android.R.id.home:
                 onBackPressed();
@@ -87,25 +84,52 @@ public class ShowAllNewsActivity extends AppCompatActivity {
 
     @Override
     protected void onPostResume() {
-        setupRecyclerView();
+        setupRecyclerViewForAdvertisement();
         super.onPostResume();
 
     }
 
-    public void setupRecyclerView(String title){
+
+    private void setupRecyclerViewForAdvertisement() {
+        //Setting up recycler view
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        Animation animation = AnimationUtils.loadAnimation(ShowAllAdvertisementsActivity.this,R.anim.splash);
+        recyclerView.setAnimation(animation);
+        //Setting recycler view adapter
+        DatabaseHandler db = new DatabaseHandler(this);
+        try {
+            db.getAllAdvertisements(new VolleyCallback(){
+                @Override
+                public void onSuccess(String result){
+                    try {
+                        JSONArray jsonArray  = new JSONObject(result).getJSONArray("data");
+                        adapter.setData(jsonArray);
+                        recyclerView.setAdapter(adapter);
+                    } catch (JSONException e) {
+                        Log.d("SetupRecyclerView","SetupRecyclerView");
+                    }
+                }
+            });
+        } catch (Exception e) {
+            Log.d("MAIN ACTIVITY","SetupRecyclerView " + e.toString());
+        }
+    }
+
+    public void setupRecyclerViewForAdvertisement(String title){
         if(title.equals("")){
-            setupRecyclerView();
+            setupRecyclerViewForAdvertisement();
             return;
         }
         //Setting up recycler view
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        Animation animation = AnimationUtils.loadAnimation(ShowAllNewsActivity.this,R.anim.splash);
+        Animation animation = AnimationUtils.loadAnimation(ShowAllAdvertisementsActivity.this,R.anim.splash);
         recyclerView.setAnimation(animation);
         //Setting recycler view adapter
         DatabaseHandler db = new DatabaseHandler(this);
         try {
-            db.searchNewsByTitle(new VolleyCallback(){
+            db.searchAdvertisementByTitle(new VolleyCallback(){
                 @Override
                 public void onSuccess(String result){
                     try {
@@ -122,33 +146,5 @@ public class ShowAllNewsActivity extends AppCompatActivity {
             Log.d("MAIN ACTIVITY","SetupRecyclerView(title) " + e.toString());
         }
     }
-
-    public void setupRecyclerView(){
-        //Setting up recycler view
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        Animation animation = AnimationUtils.loadAnimation(ShowAllNewsActivity.this,R.anim.splash);
-        recyclerView.setAnimation(animation);
-        //Setting recycler view adapter
-        DatabaseHandler db = new DatabaseHandler(this);
-        try {
-            db.getVerifiedNews(new VolleyCallback(){
-                @Override
-                public void onSuccess(String result){
-                    try {
-                        JSONArray jsonArray  = new JSONObject(result).getJSONArray("data");
-                        adapter.setData(jsonArray);
-                        //Toast.makeText(MainActivity.this, String.valueOf(jsonArray.length()), Toast.LENGTH_SHORT).show();
-                        recyclerView.setAdapter(adapter);
-                    } catch (JSONException e) {
-                        Log.d("SetupRecyclerView","SetupRecyclerView");
-                    }
-                }
-            });
-        } catch (Exception e) {
-            Log.d("MAIN ACTIVITY","SetupRecyclerView " + e.toString());
-        }
-    }
-
 
 }

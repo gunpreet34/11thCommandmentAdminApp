@@ -272,9 +272,6 @@ public class PostNewsActivity extends AppCompatActivity {
 
     }
 
-    private void checkAllFields() {
-
-    }
 
     private void loadCategories(JSONArray jsonArray) {
         try{
