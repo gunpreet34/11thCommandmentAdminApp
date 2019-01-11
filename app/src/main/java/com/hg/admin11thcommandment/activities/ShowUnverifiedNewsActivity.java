@@ -30,7 +30,7 @@ public class ShowUnverifiedNewsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_news);
+        setContentView(R.layout.activity_show);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Unverified News/Polls");
         setupRecyclerView();

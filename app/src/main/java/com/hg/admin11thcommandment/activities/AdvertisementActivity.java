@@ -27,7 +27,7 @@ public class AdvertisementActivity extends AppCompatActivity {
             mVerify.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(AdvertisementActivity.this,ShowUnverifiedNewsActivity.class);
+                    Intent i = new Intent(AdvertisementActivity.this,ShowUnverifiedAdvertisementActivity.class);
                     i.putExtra("type","Advertisement");
                     startActivity(i);
                 }
@@ -73,7 +73,7 @@ public class AdvertisementActivity extends AppCompatActivity {
         mShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(AdvertisementActivity.this,ShowAllNewsActivity.class);
+                Intent i = new Intent(AdvertisementActivity.this,ShowAllAdvertisementsActivity.class);
                 i.putExtra("type","Advertisement");
                 startActivity(i);
             }

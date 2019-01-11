@@ -28,6 +28,10 @@
         <activity
             android:name=".activities.ShowUnverifiedAdvertisementActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activities.ShowAllCategoriesActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".activities.ShowUnverifiedCategoriesActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".activities.PostNewsActivity"
             android:label="@string/title_activity_post_news"

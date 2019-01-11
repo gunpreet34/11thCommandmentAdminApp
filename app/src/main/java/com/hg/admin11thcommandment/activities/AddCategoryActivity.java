@@ -1,5 +1,6 @@
 package com.hg.admin11thcommandment.activities;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -19,10 +20,15 @@ import android.widget.Toast;
 
 import com.hg.admin11thcommandment.database.DatabaseHandler;
 import com.hg.admin11thcommandment.R;
+import com.hg.admin11thcommandment.utils.VolleyCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 public class AddCategoryActivity extends AppCompatActivity {
 
@@ -59,6 +65,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +73,6 @@ public class AddCategoryActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Add New Category");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,6 +80,8 @@ public class AddCategoryActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton fabDelete = findViewById(R.id.fab_delete_category);
+        fabDelete.setVisibility(View.INVISIBLE);
         mImageView = findViewById(R.id.image_view);
         mEtCategory = findViewById(R.id.et_cat_name);
         mImageUrl = findViewById(R.id.et_image_url);
@@ -89,8 +97,31 @@ public class AddCategoryActivity extends AppCompatActivity {
             }
         });*/
 
-        FloatingActionButton fab = findViewById(R.id.fab_submit_category);
-        fab.setOnClickListener(new View.OnClickListener() {
+        final boolean add = getIntent().getBooleanExtra("add",true);
+        if(add){
+            getSupportActionBar().setTitle("Add New Category");
+        }else{
+            getSupportActionBar().setTitle("Update Category");
+            fabDelete.setVisibility(View.VISIBLE);
+            final DatabaseHandler databaseHandler = new DatabaseHandler(AddCategoryActivity.this);
+            databaseHandler.getCategoryByTitle(new VolleyCallback() {
+                @Override
+                public void onSuccess(String result) {
+                    try {
+                        JSONObject object = new JSONObject(result);
+                        JSONObject jsonObject = object.getJSONArray("data").getJSONObject(0);
+                        mEtCategory.setText(jsonObject.getString("category"));
+                        mImageUrl.setText(jsonObject.getString("imageURL"));
+                    } catch (JSONException e) {
+                        Toast.makeText(AddCategoryActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            },getIntent().getStringExtra("category"));
+        }
+
+
+        FloatingActionButton fabSubmit = findViewById(R.id.fab_submit_category);
+        fabSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(TextUtils.isEmpty(mEtCategory.getText()) || TextUtils.isEmpty(mImageUrl.getText())){
@@ -100,14 +131,30 @@ public class AddCategoryActivity extends AppCompatActivity {
                 try{
                     HashMap <String,String> postData = new HashMap<>();
                     postData.put("category",mEtCategory.getText().toString());
-                    postData.put("image",mImageUrl.getText().toString());
+                    postData.put("imageURL",mImageUrl.getText().toString());
                     DatabaseHandler db = new DatabaseHandler(AddCategoryActivity.this);
-                    db.addCategory(postData);
+                    if(add)
+                        db.addCategory(postData);
+                    else
+                        db.updateCategory(postData);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
             }
         });
+
+        fabDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseHandler databaseHandler = new DatabaseHandler(AddCategoryActivity.this);
+                Map<String,String> map = new HashMap<>();
+                map.put("category",mEtCategory.getText().toString());
+                databaseHandler.deleteCategory(map);
+                Intent intent = new Intent(AddCategoryActivity.this,ShowAllCategoriesActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }
 

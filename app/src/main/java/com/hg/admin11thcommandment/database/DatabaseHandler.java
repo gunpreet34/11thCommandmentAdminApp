@@ -493,7 +493,7 @@ public class DatabaseHandler {
     //Get verified categories
     public void getVerifiedCategories(final VolleyCallback callback) {
         //Request a GET method to save news with ResponseListener and ResponseErrorListener
-        String getNewsUrl = url+"getVerifiedCategories";
+        String getNewsUrl = url+"getCategories";
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, getNewsUrl, null,
                 new Response.Listener<JSONObject>()
                 {
@@ -514,6 +514,41 @@ public class DatabaseHandler {
         );
         requestQueue.add(getRequest);
     }
+
+    //Get Category By Title
+    public void getCategoryByTitle(final VolleyCallback callback,String title) {
+        //Request a POST method to save news with ResponseListener and ResponseErrorListener
+        final Map<String,String> data = new HashMap<>();
+        data.put("category",title);
+        //Log.d("TITLE",data.get("title"));
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"getCategoryByTitle", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
+                callback.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                statusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                return data;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+    }
+
 
     //ADVERTISEMENTS
 

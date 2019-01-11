@@ -16,7 +16,6 @@ import android.widget.SearchView;
 
 import com.hg.admin11thcommandment.adapters.AdvertisementAdapter;
 import com.hg.admin11thcommandment.database.DatabaseHandler;
-import com.hg.admin11thcommandment.adapters.NewsAdapter;
 import com.hg.admin11thcommandment.R;
 import com.hg.admin11thcommandment.utils.VolleyCallback;
 
@@ -26,12 +25,13 @@ import org.json.JSONObject;
 
 public class ShowUnverifiedAdvertisementActivity extends AppCompatActivity {
     public RecyclerView recyclerView;
-    AdvertisementAdapter adapter = new AdvertisementAdapter(this);
+    AdvertisementAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_news);
+        adapter = new AdvertisementAdapter(this);
+        setContentView(R.layout.activity_show);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Unverified Advertisements");
     }

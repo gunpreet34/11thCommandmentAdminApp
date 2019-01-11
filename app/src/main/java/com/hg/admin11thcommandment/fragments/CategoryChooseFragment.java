@@ -14,7 +14,9 @@ import com.hg.admin11thcommandment.R;
 import com.hg.admin11thcommandment.activities.AddCategoryActivity;
 import com.hg.admin11thcommandment.activities.PostNewsActivity;
 import com.hg.admin11thcommandment.activities.ShowAllAdvertisementsActivity;
+import com.hg.admin11thcommandment.activities.ShowAllCategoriesActivity;
 import com.hg.admin11thcommandment.activities.ShowAllNewsActivity;
+import com.hg.admin11thcommandment.activities.ShowUnverifiedCategoriesActivity;
 import com.hg.admin11thcommandment.activities.ShowUnverifiedNewsActivity;
 import com.hg.admin11thcommandment.utils.SharedPrefUtil;
 
@@ -38,7 +40,7 @@ public class CategoryChooseFragment extends DialogFragment {
             mShowAllCategories.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(getContext(),ShowAllAdvertisementsActivity.class);
+                    Intent i = new Intent(getContext(),ShowAllCategoriesActivity.class);
                     startActivity(i);
                 }
             });
@@ -58,7 +60,7 @@ public class CategoryChooseFragment extends DialogFragment {
         mVerifyCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getContext(),ShowAllAdvertisementsActivity.class);
+                Intent i = new Intent(getContext(),ShowUnverifiedCategoriesActivity.class);
                 //i.putExtra("type","News/Poll");
                 startActivity(i);
             }

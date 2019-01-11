@@ -24,8 +24,7 @@ public class CategoryActivity extends AppCompatActivity {
             mShow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(CategoryActivity.this,ShowAllNewsActivity.class);
-                    i.putExtra("type","News/Poll");
+                    Intent i = new Intent(CategoryActivity.this,ShowAllCategoriesActivity.class);
                     startActivity(i);
                 }
             });
@@ -52,8 +51,7 @@ public class CategoryActivity extends AppCompatActivity {
         mVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(CategoryActivity.this,ShowUnverifiedNewsActivity.class);
-                i.putExtra("type","News/Poll");
+                Intent i = new Intent(CategoryActivity.this,ShowUnverifiedCategoriesActivity.class);
                 startActivity(i);
             }
         });
