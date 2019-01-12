@@ -23,6 +23,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hg.admin11thcommandment.constants.ServerConstants.SERVER_HOST;
+
 public class LoginActivity extends AppCompatActivity {
     private EditText mEmailInp;
     private EditText mPasswordInp;
@@ -41,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
         mSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://commandment-api.herokuapp.com/registerAdmin";
+                String url = SERVER_HOST + "/registerAdmin";
                 CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
                 builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
                 CustomTabsIntent customTabsIntent = builder.build();
