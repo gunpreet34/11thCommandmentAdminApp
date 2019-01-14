@@ -28,7 +28,7 @@ import static com.hg.admin11thcommandment.constants.ServerConstants.SERVER_HOST;
 public class DatabaseHandler {
     RequestQueue requestQueue;
     public Context mContext;
-    public static final String url = SERVER_HOST;
+    public static final String url = SERVER_HOST + "/";
     //String url = "http://192.168.43.33:3000/";
     private SharedPrefUtil mUtil;
     private int statusCode;
