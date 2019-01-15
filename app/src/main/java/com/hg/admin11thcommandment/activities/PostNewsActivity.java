@@ -248,7 +248,7 @@ public class PostNewsActivity extends AppCompatActivity {
                 map.put("_id",id);
                 databaseHandler.deleteNews(map);
                 Intent intent = new Intent(PostNewsActivity.this,ShowAllNewsActivity.class);
-                intent.putExtra("type","na");
+                intent.putExtra("type","news");
                 startActivity(intent);
             }
         });
@@ -262,6 +262,7 @@ public class PostNewsActivity extends AppCompatActivity {
                 i.putExtra("image_url",mImageUrl.getText().toString());
                 i.putExtra("description",mDescription.getText().toString());
                 i.putExtra("source",mSource.getText().toString());
+                i.putExtra("type","news");
                 startActivity(i);
             }
         });

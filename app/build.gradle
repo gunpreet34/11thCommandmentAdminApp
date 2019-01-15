@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.hg.admin11thcommandment"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -30,4 +30,5 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'com.android.support:customtabs:28.0.0'
     implementation 'com.android.support:support-vector-drawable:28.0.0'
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:8.0.1'
 }

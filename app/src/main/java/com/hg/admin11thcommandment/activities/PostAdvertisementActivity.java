@@ -174,6 +174,7 @@ public class PostAdvertisementActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(PostAdvertisementActivity.this,PreviewActivity.class);
+                i.putExtra("type",type.toLowerCase());
                 i.putExtra("title",mTitle.getText().toString());
                 i.putExtra("image_url",mUrl.getText().toString());
                 i.putExtra("advertisementUrl",mAdvertisementUrl.getText().toString());

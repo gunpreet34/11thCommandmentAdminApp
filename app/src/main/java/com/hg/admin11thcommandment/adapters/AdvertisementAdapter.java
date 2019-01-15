@@ -48,7 +48,7 @@ public class AdvertisementAdapter extends RecyclerView.Adapter<AdvertisementAdap
             advertisementHolder.mTitle.setText(jsonObject.getString("title"));
             advertisementHolder.mDescription.setText(jsonObject.getString("description"));
             if(!jsonObject.getString("URL").equals(""))
-                Picasso.get().load(jsonObject.getString("URL")).placeholder(R.drawable.news_dummy).fit().centerCrop().into(advertisementHolder.mImage);
+                Picasso.get().load(jsonObject.getString("URL")).placeholder(R.drawable.ad_dummy).fit().centerCrop().into(advertisementHolder.mImage);
             advertisementHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
