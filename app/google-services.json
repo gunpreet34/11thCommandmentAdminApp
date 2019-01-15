@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "105576178281",
+    "firebase_url": "https://thcommandmentadmin.firebaseio.com",
+    "project_id": "thcommandmentadmin",
+    "storage_bucket": "thcommandmentadmin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105576178281:android:64689ff27d3661ca",
+        "android_client_info": {
+          "package_name": "com.hg.admin11thcommandment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105576178281-0v69adtiucphsjq4bf86f467qha3k5l2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmmQBNuONksZ_u1GsFhQ8dFCClxX6MLtQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
