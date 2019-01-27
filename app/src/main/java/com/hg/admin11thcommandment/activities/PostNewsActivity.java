@@ -3,7 +3,9 @@ package com.hg.admin11thcommandment.activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +30,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hg.admin11thcommandment.constants.ServerConstants.SERVER_HOST;
+
 public class PostNewsActivity extends AppCompatActivity {
     private String id;
     ArrayList<String> list = new ArrayList<>();
@@ -36,6 +40,7 @@ public class PostNewsActivity extends AppCompatActivity {
     private GridLayout mGridLayout;
     private CheckBox mPollCheckBox;
     private EditText mTitle,mDescription,mUrl,mSource,mImageUrl,mPollQuestion,mPollOptionOne,mPollOptionTwo;
+    private TextView mUpload;
     private CardView mPollQue,mPollOptOne,mPollOptTwo;
     private String type = "";
     @SuppressLint("RestrictedApi")
@@ -60,6 +65,7 @@ public class PostNewsActivity extends AppCompatActivity {
         mUrl = findViewById(R.id.et_url);
         mSource = findViewById(R.id.et_source);
         mImageUrl = findViewById(R.id.et_image_url);
+        mUpload = findViewById(R.id.tv_upload_image);
         mPollCheckBox = findViewById(R.id.cb_poll);
         mPollQuestion = findViewById(R.id.et_poll_question);
         mPollOptionOne = findViewById(R.id.et_option_one);
@@ -71,6 +77,17 @@ public class PostNewsActivity extends AppCompatActivity {
         mPollOptOne.setVisibility(View.INVISIBLE);
         mPollOptTwo = findViewById(R.id.card_option_two);
         mPollOptTwo.setVisibility(View.INVISIBLE);
+
+        mUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = SERVER_HOST + "/uploadPicture";
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(PostNewsActivity.this, Uri.parse(url));
+            }
+        });
 
         mPollCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -247,7 +264,14 @@ public class PostNewsActivity extends AppCompatActivity {
                 Map<String,String> map = new HashMap<>();
                 map.put("_id",id);
                 databaseHandler.deleteNews(map);
-                Intent intent = new Intent(PostNewsActivity.this,ShowAllNewsActivity.class);
+
+                Intent intent;
+                boolean verified = getIntent().getBooleanExtra("verified",true);
+                if(verified){
+                    intent = new Intent(PostNewsActivity.this,ShowAllNewsActivity.class);
+                }else {
+                    intent = new Intent(PostNewsActivity.this,ShowUnverifiedNewsActivity.class);
+                }
                 intent.putExtra("type","news");
                 startActivity(intent);
             }

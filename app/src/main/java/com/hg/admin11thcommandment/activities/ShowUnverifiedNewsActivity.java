@@ -107,6 +107,7 @@ public class ShowUnverifiedNewsActivity extends AppCompatActivity {
                     try {
                         JSONArray jsonArray  = new JSONObject(result).getJSONArray("data");
                         adapter.setData(jsonArray);
+                        adapter.setVerified(false);
                         //Toast.makeText(MainActivity.this, jsonArray.length(), Toast.LENGTH_SHORT).show();
                         recyclerView.setAdapter(adapter);
                     } catch (JSONException e) {
@@ -137,6 +138,7 @@ public class ShowUnverifiedNewsActivity extends AppCompatActivity {
                         JSONArray jsonArray  = new JSONObject(result).getJSONArray("data");
                         adapter.setData(jsonArray);
                         recyclerView.setAdapter(adapter);
+                        adapter.setVerified(false);
                     } catch (JSONException e) {
                         Log.d("SetupRecyclerView","SetupRecyclerView");
                     }

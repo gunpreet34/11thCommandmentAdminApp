@@ -8,13 +8,14 @@
 
 
     <RelativeLayout
+        android:id="@+id/but_add"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:padding="20dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/but_add"
+            android:id="@+id/iv_add"
             android:src="@drawable/neww"
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -22,7 +23,7 @@
             />
 
         <TextView
-            android:layout_toEndOf="@id/but_add"
+            android:layout_toEndOf="@id/iv_add"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Post News/Poll"
@@ -30,19 +31,49 @@
             android:layout_centerVertical="true"
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_toRightOf="@id/but_add" />
+            android:layout_toRightOf="@id/iv_add" />
 
 
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/but_add_multiple"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:padding="20dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/but_verify"
+            android:id="@+id/iv_add_multiple"
+            android:src="@drawable/multiple_news"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <TextView
+            android:layout_toEndOf="@id/iv_add_multiple"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Post Multiple News/Poll"
+            android:paddingLeft="20dp"
+            android:layout_centerVertical="true"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_toRightOf="@id/iv_add_multiple" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/but_verify"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:padding="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_verify"
             android:src="@drawable/unverified"
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -53,26 +84,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="20dp"
-            android:layout_toEndOf="@id/but_verify"
+            android:layout_toEndOf="@id/iv_verify"
             android:text="Unverified News/Poll"
             android:layout_centerVertical="true"
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_toRightOf="@id/but_verify" />
+            android:layout_toRightOf="@id/iv_verify" />
 
 
     </RelativeLayout>
 
 
     <RelativeLayout
+        android:id="@+id/but_show"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:padding="20dp"
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/iv_show"
             android:src="@drawable/update"
-            android:id="@+id/but_show"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_gravity="center_horizontal"
@@ -82,12 +114,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Posted News/Poll"
-            android:layout_toEndOf="@id/but_show"
+            android:layout_toEndOf="@id/iv_show"
             android:paddingLeft="20dp"
             android:layout_centerVertical="true"
             android:textSize="20sp"
             android:textColor="@color/colorPrimaryDark"
-            android:layout_toRightOf="@id/but_show" />
+            android:layout_toRightOf="@id/iv_show" />
 
     </RelativeLayout>
 

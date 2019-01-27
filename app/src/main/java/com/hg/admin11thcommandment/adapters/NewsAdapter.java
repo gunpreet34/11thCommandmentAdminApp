@@ -24,6 +24,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
 
     private Context mContext;
     private JSONArray mData;
+    boolean verified = true;
 
     public NewsAdapter(Context mContext) {
         this.mContext = mContext;
@@ -31,6 +32,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
 
     public void setData(JSONArray mData){
         this.mData = mData;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 
     @NonNull
@@ -54,6 +59,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
                     int pos = position;
 
                     Intent i = new Intent(mContext,PostNewsActivity.class);
+                    i.putExtra("verified",verified);
                     i.putExtra("add",false);
                     i.putExtra("position",String.valueOf(pos));
                     try {

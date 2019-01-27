@@ -177,10 +177,35 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_image_url"
+            android:id="@+id/card_upload_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/card_source"
+            app:cardCornerRadius="6dp"
+            android:layout_margin="6sp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_upload_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Upload Image"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_image_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_upload_image"
             android:layout_margin="6sp">
 
             <RelativeLayout
