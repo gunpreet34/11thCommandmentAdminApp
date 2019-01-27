@@ -2,7 +2,9 @@ package com.hg.admin11thcommandment.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hg.admin11thcommandment.database.DatabaseHandler;
@@ -27,12 +30,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.hg.admin11thcommandment.constants.ServerConstants.SERVER_HOST;
+
 public class PostAdvertisementActivity extends AppCompatActivity {
     private String id;
     private EditText mTitle,mDescription,mUrl,mAdvertisementUrl,mSource,mCount;
     private CheckBox mIsShown;
     private String type = "";
     private Boolean isShown = true;
+    private TextView mUpload;
     private CollapsingToolbarLayout toolbarLayout;
     @SuppressLint("RestrictedApi")
     @Override
@@ -55,6 +61,7 @@ public class PostAdvertisementActivity extends AppCompatActivity {
         mDescription = findViewById(R.id.et_description);
         mAdvertisementUrl = findViewById(R.id.et_advertisement_url);
         mSource = findViewById(R.id.et_source);
+        mUpload = findViewById(R.id.tv_upload_image);
         mUrl = findViewById(R.id.et_url);
         mCount = findViewById(R.id.et_count);
         mIsShown = findViewById(R.id.cb_is_shown);
@@ -64,6 +71,17 @@ public class PostAdvertisementActivity extends AppCompatActivity {
         final boolean add = getIntent().getBooleanExtra("add",true);
 
         FloatingActionButton delete = findViewById(R.id.fab_delete);
+
+        mUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String url = SERVER_HOST + "/uploadPicture";
+                CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
+                builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
+                CustomTabsIntent customTabsIntent = builder.build();
+                customTabsIntent.launchUrl(PostAdvertisementActivity.this, Uri.parse(url));
+            }
+        });
 
         type = getIntent().getStringExtra("type");
         if(add){
