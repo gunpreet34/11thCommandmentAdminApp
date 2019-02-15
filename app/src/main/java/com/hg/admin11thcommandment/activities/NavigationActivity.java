@@ -79,10 +79,6 @@ public class NavigationActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_ui:
-                util.saveUi(1 - util.getUi());
-                startActivity(new Intent(NavigationActivity.this,SplashActivity.class));
-                break;
             case R.id.menu_logout:
                 util.saveToken("");
                 util.saveAccess(0);

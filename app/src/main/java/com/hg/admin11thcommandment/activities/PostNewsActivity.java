@@ -38,7 +38,7 @@ public class PostNewsActivity extends AppCompatActivity {
     ArrayList<String> tempList = new ArrayList<>();
     Map<String,Boolean> mMap = new HashMap<>();
     private GridLayout mGridLayout;
-    private CheckBox mPollCheckBox;
+    private CheckBox mPollCheckBox,mVideoCheckBox;
     private EditText mTitle,mDescription,mUrl,mSource,mImageUrl,mPollQuestion,mPollOptionOne,mPollOptionTwo;
     private TextView mUpload;
     private CardView mPollQue,mPollOptOne,mPollOptTwo;
@@ -61,6 +61,7 @@ public class PostNewsActivity extends AppCompatActivity {
 
         id = getIntent().getStringExtra("id");
         mTitle = findViewById(R.id.et_title);
+        mVideoCheckBox = findViewById(R.id.video_cb);
         mDescription = findViewById(R.id.et_description);
         mUrl = findViewById(R.id.et_url);
         mSource = findViewById(R.id.et_source);
@@ -88,6 +89,23 @@ public class PostNewsActivity extends AppCompatActivity {
                 customTabsIntent.launchUrl(PostNewsActivity.this, Uri.parse(url));
             }
         });
+        type = "Image-News";
+        mVideoCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    type = "Video-";
+                }else{
+                    type = "Image-";
+                }
+                if(mPollCheckBox.isChecked()){
+                    type += "Poll";
+                }else {
+                    type += "News";
+                }
+                Toast.makeText(PostNewsActivity.this, type, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         mPollCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -96,8 +114,11 @@ public class PostNewsActivity extends AppCompatActivity {
                     mPollQue.setVisibility(View.VISIBLE);
                     mPollOptOne.setVisibility(View.VISIBLE);
                     mPollOptTwo.setVisibility(View.VISIBLE);
-                    type = "Poll";
-
+                    if(type.contains("Image")){
+                        type = "Image-Poll";
+                    }else {
+                        type = "Video-Poll";
+                    }
                 }else{
                     mPollQue.setVisibility(View.INVISIBLE);
                     mPollOptOne.setVisibility(View.INVISIBLE);
@@ -105,8 +126,13 @@ public class PostNewsActivity extends AppCompatActivity {
                     mPollQuestion.setText("");
                     mPollOptionOne.setText("");
                     mPollOptionTwo.setText("");
-                    type = "News";
+                    if(type.contains("Image")){
+                        type = "Image-News";
+                    }else {
+                        type = "Video-News";
+                    }
                 }
+                Toast.makeText(PostNewsActivity.this, type, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -151,7 +177,7 @@ public class PostNewsActivity extends AppCompatActivity {
                         JSONObject object = new JSONObject(result);
                         JSONObject jsonObject = object.getJSONObject("data");
                         try {
-                            if(jsonObject.getString("type").equals("Poll")){
+                            if(jsonObject.getString("type").equals("Image-Poll")){
                                 mPollCheckBox.setChecked(true);
                                 mPollQue.setVisibility(View.VISIBLE);
                                 mPollOptOne.setVisibility(View.VISIBLE);
@@ -160,9 +186,23 @@ public class PostNewsActivity extends AppCompatActivity {
                                 mPollOptionOne.setText(jsonObject.getString("optionOne"));
                                 mPollOptionTwo.setText(jsonObject.getString("optionTwo"));
                                 Toast.makeText(PostNewsActivity.this, "News opened is a poll", Toast.LENGTH_SHORT).show();
+                            }else if(jsonObject.getString("type").equals("Video-Poll")){
+                                mPollCheckBox.setChecked(true);
+                                mVideoCheckBox.setChecked(true);
+                                mPollQue.setVisibility(View.VISIBLE);
+                                mPollOptOne.setVisibility(View.VISIBLE);
+                                mPollOptTwo.setVisibility(View.VISIBLE);
+                                mPollQuestion.setText(jsonObject.getString("question"));
+                                mPollOptionOne.setText(jsonObject.getString("optionOne"));
+                                mPollOptionTwo.setText(jsonObject.getString("optionTwo"));
+                                Toast.makeText(PostNewsActivity.this, "News opened is a poll", Toast.LENGTH_SHORT).show();
                             }else {
+                                if(jsonObject.getString("type").equals("Video-News")) {
+                                    mVideoCheckBox.setChecked(true);
+                                }
                                 Toast.makeText(PostNewsActivity.this, "News opened is not a poll", Toast.LENGTH_SHORT).show();
                             }
+                            type = jsonObject.getString("type");
                         }catch (Exception e){
                             Toast.makeText(PostNewsActivity.this, "News opened is not a poll", Toast.LENGTH_SHORT).show();
                         }

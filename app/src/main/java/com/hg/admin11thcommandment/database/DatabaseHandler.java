@@ -71,6 +71,42 @@ public class DatabaseHandler {
         requestQueue.add(stringRequest);
     }
 
+    //Forgot password
+    public void resetPassword(final Map<String, String> data){
+        //Request a POST method to save news with ResponseListener and ResponseErrorListener
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url+"sendMail", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Toast.makeText(mContext, jsonObject.getString("data"), Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(mContext, error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
+        ){
+            @Override
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                statusCode = response.statusCode;
+                return super.parseNetworkResponse(response);
+            }
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                return data;
+            }
+        };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(20*1000,0,DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        requestQueue.add(stringRequest);
+    }
+
 
     //For News
 

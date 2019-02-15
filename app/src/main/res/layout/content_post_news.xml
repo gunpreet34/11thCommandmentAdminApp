@@ -202,10 +202,33 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:id="@+id/card_image_url"
+            android:id="@+id/card_video_poll"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/card_upload_image"
+            android:layout_margin="6sp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="@android:color/black"
+                    android:id="@+id/video_cb"
+                    android:text="Video News?"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_image_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/card_video_poll"
             android:layout_margin="6sp">
 
             <RelativeLayout
@@ -217,7 +240,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Image URL"
+                    android:text="Media URL"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
@@ -227,6 +250,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_image_url"
                     android:imeOptions="actionNext"
+                    android:hint="Image URL or Youtube video ID"
+                    android:textAlignment="center"
                     android:singleLine="true" />
 
             </RelativeLayout>
@@ -250,7 +275,7 @@
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
                     android:id="@+id/cb_poll"
-                    android:text="Is this a poll"/>
+                    android:text="Is this a poll?"/>
 
             </RelativeLayout>
 

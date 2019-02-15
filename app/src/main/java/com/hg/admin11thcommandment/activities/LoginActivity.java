@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordInp;
     private Button mLogInBtn;
     private TextView mSignUp;
+    private TextView mForgotPassword;
     private Class targetActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,14 @@ public class LoginActivity extends AppCompatActivity {
                 builder.setToolbarColor(getResources().getColor(R.color.colorPrimary));
                 CustomTabsIntent customTabsIntent = builder.build();
                 customTabsIntent.launchUrl(LoginActivity.this, Uri.parse(url));
+            }
+        });
+
+        mForgotPassword = findViewById(R.id.forgot_password);
+        mForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,ForgotPasswordActivity.class));
             }
         });
 
