@@ -1,6 +1,5 @@
 package com.hg.admin11thcommandment.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -8,14 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.hg.admin11thcommandment.R;
 import com.hg.admin11thcommandment.database.DatabaseHandler;
-import com.hg.admin11thcommandment.utils.SharedPrefUtil;
-import com.hg.admin11thcommandment.utils.VolleyCallback;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;

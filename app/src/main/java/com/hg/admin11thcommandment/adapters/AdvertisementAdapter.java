@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.hg.admin11thcommandment.activities.PostAdvertisementActivity;
-import com.hg.admin11thcommandment.activities.PostNewsActivity;
 import com.hg.admin11thcommandment.R;
 import com.squareup.picasso.Picasso;
 import org.json.JSONArray;
@@ -52,11 +51,9 @@ public class AdvertisementAdapter extends RecyclerView.Adapter<AdvertisementAdap
             advertisementHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = position;
-
                     Intent i = new Intent(mContext,PostAdvertisementActivity.class);
                     i.putExtra("add",false);
-                    i.putExtra("position",String.valueOf(pos));
+                    i.putExtra("position",String.valueOf(position));
                     try {
                         i.putExtra("type",jsonObject.getString("type"));
                         i.putExtra("id",jsonObject.getString("_id"));

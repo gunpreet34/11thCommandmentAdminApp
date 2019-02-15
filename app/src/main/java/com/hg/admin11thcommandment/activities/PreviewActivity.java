@@ -20,8 +20,8 @@ import com.squareup.picasso.Picasso;
 
 public class PreviewActivity extends AppCompatActivity {
 
-    private ImageView mImage;
-    private TextView mTitle,mDescription,mSource;
+    private TextView mDescription;
+    private TextView mSource;
     private boolean toolbarVisibility = false;
     private CardView mCardView;
     private Toolbar toolbar;
@@ -29,12 +29,13 @@ public class PreviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ImageView image;
         if(getIntent().getStringExtra("type").trim().equals("image")){
             //Image advertisement
             setContentView(R.layout.activity_preview_image);
-            mImage = findViewById(R.id.image_view_preview);
+            image = findViewById(R.id.image_view_preview);
             try{
-                Picasso.get().load(getIntent().getStringExtra("image_url")).placeholder(R.drawable.ad_dummy).into(mImage);
+                Picasso.get().load(getIntent().getStringExtra("image_url")).placeholder(R.drawable.ad_dummy).into(image);
             }catch (Exception e){
                 Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
             }
@@ -61,19 +62,19 @@ public class PreviewActivity extends AppCompatActivity {
         }else {
             //News/Poll/Simple Advertisement
             setContentView(R.layout.activity_preview_simple);
-            mImage = findViewById(R.id.iv_news_image);
-            mTitle = findViewById(R.id.news_title);
+            image = findViewById(R.id.iv_news_image);
+            TextView title = findViewById(R.id.news_title);
             mDescription = findViewById(R.id.news_desc);
             mSource = findViewById(R.id.news_source);
             try{
-                Picasso.get().load(getIntent().getStringExtra("image_url")).placeholder(R.drawable.news_dummy).into(mImage);
+                Picasso.get().load(getIntent().getStringExtra("image_url")).placeholder(R.drawable.news_dummy).into(image);
             }catch (Exception e){
                 Toast.makeText(this, "No image url found", Toast.LENGTH_SHORT).show();
             }
             if(getIntent().getStringExtra("title").equals("")){
-                mTitle.setText("Please add a title");
+                title.setText("Please add a title");
             }else{
-                mTitle.setText(getIntent().getStringExtra("title"));
+                title.setText(getIntent().getStringExtra("title"));
             }
             if(getIntent().getStringExtra("description").equals("")){
                 mDescription.setText("Please add a description");

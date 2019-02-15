@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.hg.admin11thcommandment.R;
 import com.hg.admin11thcommandment.activities.AddCategoryActivity;
-import com.hg.admin11thcommandment.activities.PostAdvertisementActivity;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -57,11 +56,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             categoryHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = position;
-
                     Intent i = new Intent(mContext,AddCategoryActivity.class);
                     i.putExtra("add",false);
-                    i.putExtra("position",String.valueOf(pos));
+                    i.putExtra("position",String.valueOf(position));
                     try {
                         i.putExtra("id",jsonObject.getString("_id"));
                         i.putExtra("category",jsonObject.getString("category"));

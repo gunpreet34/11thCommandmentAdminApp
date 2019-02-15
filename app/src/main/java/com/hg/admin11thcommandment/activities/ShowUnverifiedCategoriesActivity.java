@@ -3,7 +3,6 @@ package com.hg.admin11thcommandment.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
@@ -11,7 +10,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import com.hg.admin11thcommandment.R;
-import com.hg.admin11thcommandment.adapters.AdvertisementAdapter;
 import com.hg.admin11thcommandment.adapters.CategoryAdapter;
 import com.hg.admin11thcommandment.database.DatabaseHandler;
 import com.hg.admin11thcommandment.utils.VolleyCallback;

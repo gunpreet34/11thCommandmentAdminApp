@@ -1,13 +1,14 @@
 package com.hg.admin11thcommandment.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.Uri;
 
 public class SharedPrefUtil implements SharedConstUtil{
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
 
+    @SuppressLint("CommitPrefEdits")
     public SharedPrefUtil(Context context) {
         mSharedPreferences=context.getSharedPreferences(PREF_NAME,Context.MODE_PRIVATE);
         mEditor=mSharedPreferences.edit();

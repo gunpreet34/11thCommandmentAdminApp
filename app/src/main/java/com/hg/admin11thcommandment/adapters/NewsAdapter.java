@@ -24,7 +24,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
 
     private Context mContext;
     private JSONArray mData;
-    boolean verified = true;
+    private boolean verified = true;
 
     public NewsAdapter(Context mContext) {
         this.mContext = mContext;
@@ -56,12 +56,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
             newsHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int pos = position;
-
                     Intent i = new Intent(mContext,PostNewsActivity.class);
                     i.putExtra("verified",verified);
                     i.putExtra("add",false);
-                    i.putExtra("position",String.valueOf(pos));
+                    i.putExtra("position",String.valueOf(position));
                     try {
                         i.putExtra("id",jsonObject.getString("_id"));
                         i.putExtra("title",jsonObject.getString("title"));

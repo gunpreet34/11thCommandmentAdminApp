@@ -8,15 +8,12 @@ import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +23,6 @@ import com.hg.admin11thcommandment.utils.VolleyCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 

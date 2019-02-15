@@ -12,12 +12,8 @@ import android.widget.ImageView;
 
 import com.hg.admin11thcommandment.R;
 import com.hg.admin11thcommandment.activities.AddCategoryActivity;
-import com.hg.admin11thcommandment.activities.PostNewsActivity;
-import com.hg.admin11thcommandment.activities.ShowAllAdvertisementsActivity;
 import com.hg.admin11thcommandment.activities.ShowAllCategoriesActivity;
-import com.hg.admin11thcommandment.activities.ShowAllNewsActivity;
 import com.hg.admin11thcommandment.activities.ShowUnverifiedCategoriesActivity;
-import com.hg.admin11thcommandment.activities.ShowUnverifiedNewsActivity;
 import com.hg.admin11thcommandment.utils.SharedPrefUtil;
 
 public class CategoryChooseFragment extends DialogFragment {

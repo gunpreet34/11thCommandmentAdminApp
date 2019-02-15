@@ -26,8 +26,8 @@ import static com.hg.admin11thcommandment.constants.ServerConstants.SERVER_HOST;
 
 
 public class DatabaseHandler {
-    RequestQueue requestQueue;
-    public Context mContext;
+    private RequestQueue requestQueue;
+    private Context mContext;
     public static final String url = SERVER_HOST + "/";
     //String url = "http://192.168.43.33:3000/";
     private SharedPrefUtil mUtil;
@@ -756,7 +756,7 @@ public class DatabaseHandler {
             @Override
             public void onResponse(String response) {
                 //Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
-                callback.onSuccess(response.toString());
+                callback.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -791,7 +791,7 @@ public class DatabaseHandler {
             @Override
             public void onResponse(String response) {
                 //Toast.makeText(mContext, response, Toast.LENGTH_SHORT).show();
-                callback.onSuccess(response.toString());
+                callback.onSuccess(response);
             }
         }, new Response.ErrorListener() {
             @Override

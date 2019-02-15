@@ -123,7 +123,7 @@ public class ShowAllNewsActivity extends AppCompatActivity {
 
     public void setupRecyclerView(){
         //Setting up recycler view
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         Animation animation = AnimationUtils.loadAnimation(ShowAllNewsActivity.this,R.anim.splash);
         recyclerView.setAnimation(animation);
