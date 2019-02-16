@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:clickable="true"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar_preview_activity"
+            android:background="#bfffffff">
+
+            <TextView
+                android:textSize="16sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ALL NEWS"/>
+        </android.support.v7.widget.Toolbar>
+
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view_preview"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        card_view:cardCornerRadius="7dp"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/content_main_frame">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:elevation="4dp"
+                    android:background="#FFF"
+                    android:translationZ="2dp"
+                    android:id="@+id/bottom_layout"
+                    android:layout_alignParentBottom="true"
+                    android:layout_height="80.5dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_alignParentBottom="true"
+                        android:layout_height="80dp"
+
+                        android:id="@+id/bottom_view"
+                        android:orientation="horizontal"
+                        android:background="#00000000"
+                        >
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/share_layout">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:src="@drawable/ic_share_btn"
+                                    android:id="@+id/share_btn"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Share"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="10sp"/>
+                            </LinearLayout>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:id="@+id/bookmark_layout">
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:orientation="vertical">
+                                <ImageView
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:src="@drawable/ic_bookmarks"
+                                    android:id="@+id/bookmark_btn"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="10sp"
+                                    android:text="Bookmark"/>
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:id="@+id/bottom_line"
+                        android:layout_above="@id/bottom_view"
+                        android:background="#8A8A8A"/>
+
+                </RelativeLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80.5dp"
+                    android:id="@+id/bottom_frame"
+                    android:layout_alignParentBottom="true"
+                    android:background="#FFF">
+
+                </FrameLayout>
+                <!--     <RelativeLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="80.5dp"
+                         android:id="@+id/question_layout"
+                         android:orientation="vertical"
+                         android:background="#FFF"
+                         android:layout_alignParentBottom="true">
+                         <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:layout_alignParentBottom="true"
+                             android:orientation="horizontal"
+                             android:background="#A3AFB4"
+                             android:layout_marginLeft="8dp"
+                             android:layout_marginRight="8dp"
+                             android:id="@+id/answer_layout">
+                             <TextView
+                                 android:layout_width="0dp"
+                                 android:gravity="center"
+                                 android:layout_weight="1"
+                                 android:layout_height="wrap_content"
+                                 android:textSize="20dp"
+                                 android:id="@+id/option_one_tv"
+                                 android:textStyle="bold"
+                                 android:textColor="#000"
+                                 android:text="Yes"/>
+                             <View
+                                 android:layout_width="1dp"
+                                 android:layout_height="match_parent"
+                                 android:layout_weight="0"
+                                 android:background="#000"
+                                 />
+                             <TextView
+                                 android:layout_width="0dp"
+                                 android:layout_weight="1"
+                                 android:id="@+id/option_two_tv"
+                                 android:textColor="#000"
+                                 android:gravity="center"
+                                 android:textStyle="bold"
+                                 android:textSize="20dp"
+                                 android:layout_height="wrap_content"
+                                 android:text="No"/>
+                         </LinearLayout>
+                         <TextView
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:paddingLeft="4dp"
+                             android:paddingRight="4dp"
+                             android:layout_above="@id/answer_layout"
+                             android:layout_alignParentTop="true"
+                             android:textStyle="bold"
+                             android:textSize="16dp"
+                             android:layout_marginBottom="2dp"
+                             android:id="@+id/question_tv"
+                             android:text="Is this a nice Is this a nice Is this a nice Is this a nice question?"/>
+                     </RelativeLayout>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/top_layout"
+                    android:layout_above="@id/bottom_layout">
+
+                    <com.pierfrancescosoffritti.androidyoutubeplayer.player.YouTubePlayerView
+                        android:id="@+id/youtube_player_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:orientation="vertical"
+                        android:layout_weight="4">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="22sp"
+                            android:id="@+id/news_title"
+                            android:textStyle="bold"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:padding="16dp"
+                            android:text="Lorem Ipsum"
+                            android:textColor="#000000"
+                            />
+                        <TextView
+                            android:id="@+id/news_desc"
+                            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset "
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:textSize="18sp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+
+                            android:layout_marginTop="10dp"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:textSize="12sp"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:text="swipe for more at 11th commandment"
+                            android:id="@+id/news_source"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </FrameLayout>
+    </android.support.v7.widget.CardView>
+</RelativeLayout>

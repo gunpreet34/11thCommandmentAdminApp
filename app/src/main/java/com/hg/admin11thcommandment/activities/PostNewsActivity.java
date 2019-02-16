@@ -42,7 +42,7 @@ public class PostNewsActivity extends AppCompatActivity {
     private EditText mTitle,mDescription,mUrl,mSource,mImageUrl,mPollQuestion,mPollOptionOne,mPollOptionTwo;
     private TextView mUpload;
     private CardView mPollQue,mPollOptOne,mPollOptTwo;
-    private String type = "";
+    private String type = "Image-News";
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,6 @@ public class PostNewsActivity extends AppCompatActivity {
                 customTabsIntent.launchUrl(PostNewsActivity.this, Uri.parse(url));
             }
         });
-        type = "Image-News";
         mVideoCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -103,7 +102,7 @@ public class PostNewsActivity extends AppCompatActivity {
                 }else {
                     type += "News";
                 }
-                Toast.makeText(PostNewsActivity.this, type, Toast.LENGTH_SHORT).show();
+                Toast.makeText(PostNewsActivity.this, "Changed - Type : " + type, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -203,6 +202,7 @@ public class PostNewsActivity extends AppCompatActivity {
                                 Toast.makeText(PostNewsActivity.this, "News opened is not a poll", Toast.LENGTH_SHORT).show();
                             }
                             type = jsonObject.getString("type");
+                            Toast.makeText(PostNewsActivity.this, "Received - Type: " + type, Toast.LENGTH_SHORT).show();
                         }catch (Exception e){
                             Toast.makeText(PostNewsActivity.this, "News opened is not a poll", Toast.LENGTH_SHORT).show();
                         }
@@ -260,7 +260,7 @@ public class PostNewsActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(mTitle.getText()) || TextUtils.isEmpty(mDescription.getText()) || TextUtils.isEmpty(mSource.getText()) || TextUtils.isEmpty(mUrl.getText()) || TextUtils.isEmpty(mImageUrl.getText())){
                     Toast.makeText(PostNewsActivity.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(type.equals("Poll")){
+                }else if(type.contains("Poll")){
                     if(TextUtils.isEmpty(mPollQuestion.getText()) || TextUtils.isEmpty(mPollOptionOne.getText()) || TextUtils.isEmpty(mPollOptionTwo.getText())){
                         Toast.makeText(PostNewsActivity.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
                         return;
@@ -273,7 +273,7 @@ public class PostNewsActivity extends AppCompatActivity {
                 map.put("imageURL",mImageUrl.getText().toString());
                 map.put("source",mSource.getText().toString());
                 map.put("type",type);
-                if(type.equals("Poll")){
+                if(type.contains("Poll")){
                     map.put("question",mPollQuestion.getText().toString());
                     map.put("optionOne",mPollOptionOne.getText().toString());
                     map.put("optionTwo",mPollOptionTwo.getText().toString());
@@ -326,7 +326,7 @@ public class PostNewsActivity extends AppCompatActivity {
                 i.putExtra("image_url",mImageUrl.getText().toString());
                 i.putExtra("description",mDescription.getText().toString());
                 i.putExtra("source",mSource.getText().toString());
-                i.putExtra("type","news");
+                i.putExtra("type",type);
                 startActivity(i);
             }
         });

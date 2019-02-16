@@ -61,16 +61,38 @@ public class PreviewActivity extends AppCompatActivity {
                     }, true);
         }else {
             //News/Poll/Simple Advertisement
-            setContentView(R.layout.activity_preview_simple);
-            image = findViewById(R.id.iv_news_image);
+            if(getIntent().getStringExtra("type").contains("Video")){
+                setContentView(R.layout.activity_preview_news_video);
+                YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
+                youTubePlayerView.initialize(
+                        new YouTubePlayerInitListener() {
+
+                            @Override
+                            public void onInitSuccess(
+                                    final YouTubePlayer initializedYouTubePlayer) {
+
+                                initializedYouTubePlayer.addListener(
+                                        new AbstractYouTubePlayerListener() {
+                                            @Override
+                                            public void onReady() {
+                                                initializedYouTubePlayer.loadVideo(getIntent().getStringExtra("image_url"), 0);
+                                            }
+                                        });
+                            }
+                        }, true);
+            }else{
+                setContentView(R.layout.activity_preview_simple);
+                image = findViewById(R.id.iv_news_image);
+                try{
+                    Picasso.get().load(getIntent().getStringExtra("image_url")).placeholder(R.drawable.news_dummy).into(image);
+                }catch (Exception e){
+                    Toast.makeText(this, "No image url found", Toast.LENGTH_SHORT).show();
+                }
+            }
             TextView title = findViewById(R.id.news_title);
             mDescription = findViewById(R.id.news_desc);
             mSource = findViewById(R.id.news_source);
-            try{
-                Picasso.get().load(getIntent().getStringExtra("image_url")).placeholder(R.drawable.news_dummy).into(image);
-            }catch (Exception e){
-                Toast.makeText(this, "No image url found", Toast.LENGTH_SHORT).show();
-            }
+
             if(getIntent().getStringExtra("title").equals("")){
                 title.setText("Please add a title");
             }else{
